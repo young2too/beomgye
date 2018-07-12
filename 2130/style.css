@@ -1,0 +1,139 @@
+h1{
+  font-size: 45px;
+  padding: 20px;
+  transition-duration: 0.4s;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0,0,0,3);
+  cursor: pointer;
+}
+
+h2{
+  text-align: center;
+  color : blue;
+  font-family: sans-serif;
+}
+
+
+h1:hover{
+  text-shadow: 2px 2px 4px rgb(255,0,0);
+}
+a.title{
+  color:black;
+  text-decoration: none;
+}
+
+a.title:visited{
+  color:black;
+  text-decoration: none;
+}
+
+a.vertical{
+  text-decoration: none;
+  color: black;
+}
+
+a.horizen{
+  text-decoration: none;
+}
+
+ul{
+  list-style-type: none;
+}
+
+li{
+  margin: 40px 0;
+}
+
+nav ul li.horizen{
+  display:inline;
+  border-left:1px solid black;
+  padding:0 10px;
+}
+nav ul li.horizen:first-child{border-left:none;}
+
+input[type=button]{
+  cursor: pointer;
+}
+
+input[name=score]{
+  width:50px;
+}
+
+tr:first-child{
+  background-color: cyan
+}
+
+tr{
+  width:100%;
+}
+
+td{
+  width : 80px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+  cursor:default;
+}
+
+td:first-child{
+  border-left: 1px solid black;
+}
+
+td:nth-child(2){
+  cursor: pointer
+}
+
+td:hover{
+  background-color: yellow;
+}
+input{
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 20px;
+}
+
+div.grid1{
+  border : none;
+  height : 700px;
+  width : 1407px;
+}
+
+div.grid2{
+  border : none;
+  display :grid;
+  grid-template-columns: : 30% 2fr;
+}
+
+div.main_content{
+  overflow: scroll;
+  height:700px;
+  width:1067px;
+}
+
+div.adminlogin{
+  border: 1px solid black;
+  height: 700px;
+  width: 240px;
+  float:left;
+}
+
+div.sidemenu{
+  width:inherit;
+  float:left;
+  width:240px;
+}
+
+div.footer{
+  border: 1px solid black;
+  height:5%;
+  clear: both;
+}
+
+div.reg{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width : 450px;
+    margin : 0 auto;
+}

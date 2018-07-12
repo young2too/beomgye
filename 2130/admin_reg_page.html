@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>관리자 등록 페이지</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script language = "JavaScript">
+function check_ID_Dupe(){
+  
+}
+function check_all_clear(){
+  if(document.getElementById("admin_id").value==""||
+  document.getElementById("admin_pw").value==""||
+  document.getElementById("admin_pw2").value==""||
+  document.getElementById("admin_name").value==""){
+    if(document.getElementById("admin_id").value==""){
+      alert("아이디를 입력하지 않았습니다")
+      return document.getElementById("admin_id").focus();
+    }
+    else if(document.getElementById("admin_pw").value==""){
+      alert("비밀번호를 입력하지 않았습니다")
+      document.getElementById("admin_pw").focus();
+    }
+    else if(document.getElementById("admin_pw2").value==""){
+      alert("비밀번호 확인을 입력하지 않았습니다")
+      document.getElementById("admin_pw2").focus();
+    }
+    else if(document.getElementById("admin_name").value==""){
+      alert("이름을 입력하지 않았습니다")
+      document.getElementById("admin_name").focus();
+    }
+  }
+  else if(document.getElementById("admin_pw").value != document.getElementById("admin_pw2").value){
+    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다!")
+    document.getElementById("admin_pw").value=""
+    document.getElementById("admin_pw2").value=""
+    return document.getElementById("admin_pw").focus();
+  }
+  else{
+    document.getElementById("admin_reg_form").submit();
+  }
+}
+</script>
+<body>
+  <h1><a class="title" href="index.html">0.0.1</a></h1>
+  <hr>
+  <h2>관리자 등록 페이지</h2>
+  <div class="reg">
+    <form action="admin.php" method="post" id="admin_reg_form">
+      <fieldset>
+        <legend>관리자 등록정보(필수)</legend>
+        <label for="admin_name">이름:<input type="text" id="admin_name" name="admin_name"></label><br>
+        <label for="admin_id"> ID : <input type="text" id="admin_id" name="admin_id"></label>
+        <input type="button" value="중복확인" onclick="check_ID_Dupe()"><br>
+        <label for="admin_pw"> PW : <input type="password" id="admin_pw" name="admin_pw"></label><br>
+        <label for="admin_pw2"> PW확인 : <input type="password" id="admin_pw2" name="admin_pw2"></label><br>
+        <input type="button" value="확인" id="confirm_btn" name="confirm_btn" onclick="check_all_clear()">
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>
