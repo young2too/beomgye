@@ -1,20 +1,28 @@
 <?php
+session_start();
 function check_login(){
   $logined_id = $_POST['loginid'];
   $logined_pw = $_POST['loginpw'];
+  $query_str = " SELECT * FROM admin WHERE ID= '$logined_id' and PW= '$logined_pw'";
   $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
-  $result_set = mysqli_query($conn, "
-      SELECT *
-      FROM 'admin'
-      WHERE ID='{$logined_id}' and PW='{$logined_pw}'
-  ") or die(mysqli_error($conn));
-  // while ($row = mysqli_fetch_array($result_set)){
-  //       echo $row['id'];
-  //       echo '<br>';
-  //
-  //    }
-
+  $result_set = mysqli_query($conn, $query_str) or die(mysqli_error($conn));
+  while ($row = mysqli_fetch_array($result_set)){
+    if($row['ID'] == $logined_id){
+      valid_login($row['NAME']);
+      mysqli_close($conn);
+      return true;
+    }
+  }
+  echo "<script>alert('아이디 또는 패스워드가 잘못되었습니다.');history.back();</script>";
   mysqli_close($conn);
+  return false;
+}
+
+function valid_login($Name){
+
+  $_SESSION['is_login']=true;
+  $_SESSION['admin_name']=$Name;
+  header("Location: ./index.php");
 }
 ?>
 
@@ -26,16 +34,7 @@ function check_login(){
 </head>
 <body>
   <?php
-  $login_result = check_login();
-  echo $login_result;
-  if($login_result == true){
-    echo "로그인 성공함";
-    //원래 페이지에 이 정보를 전달하고 싶다!
-  }
-  else{
-    echo "로그인 실패함";
-    //원래 페이지에 이 정보를 전달하고 싶다!
-  }
+    check_login();
   ?>
 </body>
 </html>

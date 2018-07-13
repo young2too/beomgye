@@ -12,8 +12,6 @@ h2{
   color : blue;
   font-family: sans-serif;
 }
-
-
 h1:hover{
   text-shadow: 2px 2px 4px rgb(255,0,0);
 }
@@ -55,10 +53,6 @@ input[type=button]{
   cursor: pointer;
 }
 
-input[name=score]{
-  width:50px;
-}
-
 tr:first-child{
   background-color: cyan
 }
@@ -93,6 +87,14 @@ input{
   margin-right: 20px;
 }
 
+input.score_putin{
+  width:50px;
+}
+
+input.search{
+  width : 200px;
+}
+
 div.grid1{
   border : none;
   height : 700px;
@@ -108,7 +110,7 @@ div.grid2{
 div.main_content{
   overflow: scroll;
   height:700px;
-  width:1067px;
+  width:1150px;
 }
 
 div.adminlogin{
@@ -118,10 +120,13 @@ div.adminlogin{
   float:left;
 }
 
+div.loginform{
+  width:inherit;
+}
+
 div.sidemenu{
   width:inherit;
   float:left;
-  width:240px;
 }
 
 div.footer{
@@ -131,9 +136,25 @@ div.footer{
 }
 
 div.reg{
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #f2f2f2;
     padding: 20px;
     width : 450px;
-    margin : 0 auto;
+    margin : 0 434.5px;
+}
+
+div.loginedform{
+  visibility: hidden;
+  position: absolute;
+  width:240px;
+  height:100px;
+}
+
+div.logined_text{
+  text-align: center;
+  font-size: 24px;
+}
+
+a{
+  text-decoration: none;
 }

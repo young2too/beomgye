@@ -3,27 +3,45 @@
 <head>
   <meta charset="utf-8">
   <title>관리자 페이지</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?ver=1">
 </head>
+<script>
+function check_submit(){
+  var putin = document.getElementsByClassName('score_putin');
+  var i;
+  for(i=0;i<putin.length;i++){
+    if(putin[i].value == ""){
+      alert("채우지 않은 값이 있습니다!");
+      return putin[i].focus();
+    }
+  }
+  document.getElementById('score_form').submit();
+}
+</script>
+
 <body>
-  <h1><a class="title" href="index.html">0.0.1</a></h1>
-  <h2>관리자 페이지</h2>
+  <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h2>전적등록 페이지</h2>
   <hr>
-    <div class="sidemenu">
-      <ul type="">
-        <li>전적등록</li>
-        <li>전적삭제</li>
-        <li>전적갱신</li>
-      </ul>
-    </div>
-    <div class="reg">
-      <form action="record.php" method="get">
-      동 이름 : <input type="text" name="score" id="dong_name"> 점수 : <input type="number" name="score" id="dong_score"> 별 : <input type="number" name="score" id="dong_star"><br><hr>
-      남 이름 : <input type="text" name="score" id="nam_name"> 점수 : <input type="number" name="score" id="nam_score"> 별 : <input type="number" name="score" id="nam_star"><br><hr>
-      서 이름 : <input type="text" name="score" id="seo_name"> 점수 : <input type="number" name="score" id="seo_score"> 별 : <input type="number" name="score" id="seo_star"><br><hr>
-      북 이름 : <input type="text" name="score" id="buk_name"> 점수 : <input type="number" name="score" id="buk_store"> 별 : <input type="number" name="score" id="buk_star"><br>
-      <input type="submit" name="submit" value="제출" style="margin:10px 170px">
-      </form>
-    </div>
+  <div class="sidemenu">
+    <ul type="">
+      <li><span style="color :red;">전적등록</span></li>
+      <li><a href="delete_record.html">전적삭제</a></li>
+      <li>전적갱신</li>
+      <li><a href="index.php">처음으로</a></li>
+    </ul>
+  </div>
+  <div class="reg">
+    <form action="record.php" method="post" id="score_form">
+      <fieldset>
+        <legend>점수 입력(전란 입력 필수)</legend>
+      동 이름 : <input class="score_putin" type="text" name="dong_name" > 점수 : <input class="score_putin" type="number" name="dong_score"> 별 : <input class="score_putin" type="number" name="dong_star"><br><hr>
+      남 이름 : <input class="score_putin" type="text" name="nam_name"> 점수 : <input class="score_putin" type="number" name="nam_score"> 별 : <input class="score_putin" type="number" name="nam_star"><br><hr>
+      서 이름 : <input class="score_putin" type="text" name="seo_name"> 점수 : <input class="score_putin" type="number" name="seo_score"> 별 : <input class="score_putin" type="number" name="seo_star"><br><hr>
+      북 이름 : <input class="score_putin" type="text" name="buk_name"> 점수 : <input class="score_putin" type="number" name="buk_score"> 별 : <input class="score_putin" type="number" name="buk_star"><br>
+      <input class="score_putin" type="button" name="submit_btn" value="제출" onclick="check_submit()" style="margin:10px 170px">
+      </fieldset>
+    </form>
+  </div>
 </body>
 </html>
