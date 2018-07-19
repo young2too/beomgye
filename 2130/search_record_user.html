@@ -13,22 +13,31 @@
   <hr>
   <div class="sidemenu">
     <ul type="">
-      <li><a href="index.html">처음으로</a></li>
+      <li><a href="index.php">처음으로</a></li>
       <li><span style="color :red;">전적검색</span></li>
-      <li>바로가기</li>
-
+      <li><a class="vertical" href="name_reg_page.php">닉네임 등록</a></li>
     </ul>
   </div>
   <div class="reg">
     <form action="search_record.php" method="post" id="search_form">
-    <label for="이름 검색">플레이어 이름 :
-      <input class="search" type="text" name="name_4_search" placeholder="플레이어 이름"></label><br>
-      <label for="날짜 검색">기간 선택 :
-        <input class="search_date" type="date" name="date_4_search_start" >~
-        <input class="search_date" type="date" name="date_4_search_end" >
-      </label>
-      <input type="submit" value="검색" name="search_btn">
+      <label for="이름 검색">플레이어 이름 :
+        <input class="search" type="text" name="name_4_search" placeholder="플레이어 이름"></label><br>
+        <label for="날짜 검색">기간 선택 :
+          <input class="search_date" type="date" name="date_4_search_start" >~
+          <input class="search_date" type="date" name="date_4_search_end" >
+        </label>
+        <input class="search_btn_class" type="submit" value="검색" name="search_btn">
       </form>
+    </div>
+    <div class="footer">
+      <nav>
+        <ul>
+          <li class="horizen">가로메뉴 연습</li>
+          <li class="horizen">young2too13@gmail.com</li>
+          <li class="horizen">Tel 010-123-1234</li>
+          <li class="horizen">ver 0.0.1</li>
+        </ul>
+      </nav>
     </div>
     <script>
     //오늘 날짜로 초기화

@@ -136,7 +136,7 @@ function write_record(){
     ?>
     <script>
     alert("등록되었습니다!");
-    history.back();
+    window.open('index.php','_self');
     </script>
   </body>
   </html>

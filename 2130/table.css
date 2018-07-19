@@ -2,7 +2,8 @@ div.blueTable {
   border: 1px solid #1C6EA4;
   background-color: #EEEEEE;
   text-align: center;
-  width:inherit;
+  width:100%;
+  min-width: 1000px;
   border-collapse: collapse;
 }
 .divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead,

@@ -67,13 +67,12 @@ function show_ranking(){
     내가 만드는 기록사이트
   </title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="table.css?ver=2">
+  <link rel="stylesheet" href="table.css">
 </head>
 <script>
 var MAX_ROWS = 12;
 var _index = 0;
 var _rowcount = 1;
-
 
 function login_ok() {
   var input_id = document.getElementById('loginid').value;
@@ -88,13 +87,8 @@ function login_ok() {
 }
 
 function check_admin() {
-  var pass = prompt("관리자 비밀번호를 입력");
-  if (pass == "1230") {
-    alert("관리자 인증되었습니다");
-    window.open("admin_reg_page.html");
-  } else {
-    alert("틀렸습니다");
-  }
+  var pass = prompt("최고관리자 비밀번호를 입력");
+  super_pw_frm.location.href ="./check_super_admin.php?admin_pass="+pass;
 }
 
 function change_form_logout2login(){
@@ -201,6 +195,8 @@ function print_result_into_cell(record_result){
       </ul>
     </nav>
   </div>
+
+  <iframe id="super_pw_frm" scrolling="no" frameborder="no" width="0" height="0" name="super_pw_frm"></iframe>
   <?php
     is_logined();
     show_ranking();

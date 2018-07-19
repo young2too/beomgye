@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-
-
 function start_search(){
   $search_name = $_POST['name_4_search'];//찾는 이름
   $start_date = $_POST['date_4_search_start'];//날짜의 시작
@@ -82,8 +80,8 @@ function start_search(){
   <meta charset="utf-8">
   <title>검색결과 페이지</title>
 </head>
-<link rel="stylesheet" href="table.css?ver=1">
-<link rel="stylesheet" href="style.css?ver=3">
+<link rel="stylesheet" href="table.css?ver=0">
+<link rel="stylesheet" href="style.css?ver=1">
 <script>
 var MAX_ROWS = 14;
 var _index = 0;
@@ -105,9 +103,11 @@ function print_result_into_cell(record_result){
   _index ++;
   if(_index==MAX_ROWS){
     if(_login_check==true){//관리자라면 삭제버튼 끝에 추가
+
       var newBtn=document.createElement('BUTTON');
+      var btn_connect_id_cell = document.getElementById('div_cell_'+_rowcount).innerHTML;//버튼과 같은 줄의 이름 셀의 내용을 복사
       newBtn.setAttribute('class', 'delete_btn'+_rowcount);
-      newBtn.setAttribute('onclick',"location.href='delete_clicked_record.php'");
+      newBtn.setAttribute('onclick',"location.href='delete_clicked_record.php?div_cell_"+_rowcount+"="+btn_connect_id_cell+"&rowcount="+_rowcount+"'");
       newBtn.innerHTML="삭제";
       document.getElementsByClassName('divTableRow')[_rowcount].appendChild(newBtn);
     }
@@ -119,18 +119,26 @@ function print_result_into_cell(record_result){
     _rowcount++;//행말이 될 때마다 테이블몸뚱아리에 하나씩 추가
   }
 }
+function sidememu_user_or_manager(){
+  if(_login_check == false){
+      document.getElementById('1st').innerHTML="<a class='vertical' href='index.php'>처음으로</a>";
+      document.getElementById('2nd').innerHTML="<span style='color :red;'>전적검색</span>";
+      document.getElementById('3rd').innerHTML="<a class='vertical' href='name_reg_page.php'>닉네임 등록</a>";
+      document.getElementById('4th').innerHTML="";
+  }
+}
 </script>
 <body>
   <h1><a class="title" href="index.php">0.0.1</a></h1>
-  <h2>전적 삭제 페이지</h2>
+  <h2>검색결과 페이지</h2>
   <hr>
   <div class="wrap_search_record">
     <div class="sidemenu">
       <ul type="">
-        <li><a href="admin_page.html">전적등록</a></li>
-        <li><span style="color :red;">전적삭제</span></li>
-        <li>전적갱신</li>
-        <li><a href="index.php">처음으로</a></li>
+        <li id="1st"><a href="admin_page.html">전적등록</a></li>
+        <li id="2nd"><span style="color :red;">전적삭제</span></li>
+        <li id="3rd">전적갱신</li>
+        <li id="4th"><a href="index.php">처음으로</a></li>
       </ul>
     </div>
     <div class="search_table_content">
@@ -160,6 +168,16 @@ function print_result_into_cell(record_result){
       </div>
     </div>
   </div>
+  <div class="footer">
+    <nav>
+      <ul>
+        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen">young2too13@gmail.com</li>
+        <li class="horizen">Tel 010-123-1234</li>
+        <li class="horizen">ver 0.0.1</li>
+      </ul>
+    </nav>
+  </div>
   <?php
   if(empty($_SESSION['is_login']) == false){
     echo "<script>_login_check = true;</script>";
@@ -167,4 +185,7 @@ function print_result_into_cell(record_result){
   start_search();
   ?>
 </body>
+<script>
+  sidememu_user_or_manager();
+</script>
 </html>

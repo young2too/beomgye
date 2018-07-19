@@ -134,6 +134,16 @@ function check_name_submit(){
       </div>
     </div>
   </div>
+  <div class="footer">
+    <nav>
+      <ul>
+        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen">young2too13@gmail.com</li>
+        <li class="horizen">Tel 010-123-1234</li>
+        <li class="horizen">ver 0.0.1</li>
+      </ul>
+    </nav>
+  </div>
   <iframe id="dupe_frm2" scrolling="no" frameborder="no" width="0" height="0" name="dupe_frm2"></iframe>
   <?php
   is_logined();
