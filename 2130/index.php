@@ -11,6 +11,52 @@ function is_logined(){
     return true;
   }
 }
+
+function show_ranking(){
+  $row_num = 1;
+  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  $sql_ranking_query = "
+  SELECT  *
+  FROM `player_record`
+  ORDER BY `player_record`.`UMA` DESC
+  ";
+  $result_set = mysqli_query($conn, $sql_ranking_query) or die(mysqli_error($conn));
+  while($row = mysqli_fetch_array($result_set)){
+
+
+    $print_Name = $row['NAME'];
+    $print_Ave_Score = $row['AVE_SCORE'];
+    $print_Sum_Score = $row['SUM_SCORE'];
+    $print_UMA = $row['UMA'];
+    $print_Star = $row['STAR'];
+    $print_Ave_UMA = $row['AVE_UMA'];
+    $print_1st = $row['1ST'];
+    $print_2nd = $row['2ND'];
+    $print_3rd = $row['3RD'];
+    $print_4th = $row['4TH'];
+    $print_Game_Count = $row['GAME_COUNT'];
+
+    echo "<script>
+    print_result_into_cell($row_num)
+
+    print_result_into_cell($print_Name)
+    print_result_into_cell($print_Ave_Score)
+    print_result_into_cell($print_Sum_Score)
+    print_result_into_cell($print_UMA)
+
+    print_result_into_cell($print_Star)
+    print_result_into_cell($print_Ave_UMA)
+    print_result_into_cell($print_1st)
+    print_result_into_cell($print_2nd)
+
+    print_result_into_cell($print_3rd)
+    print_result_into_cell($print_4th)
+    print_result_into_cell($print_Game_Count)
+
+    </script>";
+    $row_num++;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,25 +67,28 @@ function is_logined(){
     내가 만드는 기록사이트
   </title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="table.css?ver=1">
+  <link rel="stylesheet" href="table.css?ver=2">
 </head>
 <script>
+var MAX_ROWS = 12;
+var _index = 0;
+var _rowcount = 1;
 
 
 function login_ok() {
-  var input_id = document.getElementById('loginid');
-  var input_pw = document.getElementById('loginpw');
+  var input_id = document.getElementById('loginid').value;
+  var input_pw = document.getElementById('loginpw').value;
   if (input_id == "" || input_pw == "") {
     alert("아이디 또는 비밀번호를 입력하십시오.");
+    return;
   }
   else{
-    document.getElementById('loginform').submit();
+    document.getElementById('login_form').submit();
   }
 }
 
 function check_admin() {
   var pass = prompt("관리자 비밀번호를 입력");
-  console.log("%s",pass);
   if (pass == "1230") {
     alert("관리자 인증되었습니다");
     window.open("admin_reg_page.html");
@@ -61,6 +110,25 @@ function change_form_login2logout(){
   var logeddiv = document.getElementById("loginedform");
     logeddiv.style.visibility = "hidden";
 }
+
+
+
+function print_result_into_cell(record_result){
+  var newDiv=document.createElement('DIV'); // DIV 객체 생성
+  newDiv.setAttribute('class','divTableCell'); // class 지정
+  newDiv.innerHTML=record_result; // 객체에 포함할 텍스트
+  document.getElementsByClassName('divTableRow')[_rowcount].appendChild(newDiv); // row의 자식 노드로 첨부 (필수)
+  _index ++;
+  if(_index==MAX_ROWS){
+    _index=0;
+    var newRowDiv=document.createElement('DIV'); // DIV 객체 생성
+    newRowDiv.setAttribute('class','divTableRow'); // id 지정
+    document.getElementsByClassName('divTableBody')[0].appendChild(newRowDiv);
+    _rowcount++;
+  }
+}
+
+
 </script>
 
 <body>
@@ -75,7 +143,7 @@ function change_form_login2logout(){
         }
         ?>
         <br>
-        <input type="button" name="logout" value="점수등록" onclick="window.location.href='admin_page.html'">
+        <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.html'">
         <input type="button" name="logout" value="로그아웃" onclick="location.href='logout.php'">
       </div>
       <div class="loginform" id="loginform">
@@ -89,9 +157,9 @@ function change_form_login2logout(){
       <hr>
       <div class="sidemenu">
         <ul>
-          <li><a class="vertical" href="">Home</a></li>
-          <li><a class="vertical" href="">Home2</a></li>
-          <li><a class="vertical" href="">Home3</a></li>
+          <li><a class="vertical" href="index.php">처음으로</a></li>
+          <li><a class="vertical" href="search_record_user.html">전적검색</a></li>
+          <li><a class="vertical" href="name_reg_page.php">닉네임 등록</a></li>
         </ul>
       </div>
     </div>
@@ -116,60 +184,6 @@ function change_form_login2logout(){
         </div>
         <div class="divTableBody">
           <div class="divTableRow">
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell_name">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-          </div>
-          <div class="divTableRow">
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell_name">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-          </div>
-          <div class="divTableRow">
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell_name">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-          </div>
-          <div class="divTableRow">
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell_name">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
-            <div class="divTableCell">&nbsp;</div>
           </div>
         </div>
       </div>
@@ -180,15 +194,16 @@ function change_form_login2logout(){
   <div class="footer">
     <nav>
       <ul>
-        <li class="horizen">Menu1</li>
-        <li class="horizen">Menu2</li>
-        <li class="horizen">Menu3</li>
-        <li class="horizen">Menu4</li>
+        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen">young2too13@gmail.com</li>
+        <li class="horizen">Tel 010-123-1234</li>
+        <li class="horizen">ver 0.0.1</li>
       </ul>
     </nav>
   </div>
   <?php
     is_logined();
+    show_ranking();
    ?>
 </body>
 

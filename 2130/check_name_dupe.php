@@ -1,20 +1,19 @@
 <?php
-$admin_id = $_GET['admin_id'];
+$user_name = $_GET['user_name'];
 $query_str = "
 SELECT *
-FROM admin
-WHERE ID= '$admin_id'
+FROM player_record
+WHERE NAME= '$user_name'
 ";
 $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
 $result_set = mysqli_query($conn, $query_str) or die(mysqli_error($conn));
 $row = mysqli_fetch_array($result_set);
 mysqli_close($conn);
 if($row){
-  echo "<script>parent.alert('이미 사용중인 아이디입니다');</script>";
-
+  echo "<script>parent.alert('이미 사용중인 이름입니다');</script>";
 }
 else{
-  echo "<script>parent.alert('사용가능한 아이디입니다');</script>";
+  echo "<script>parent.alert('사용가능한 이름입니다');</script>";
   echo "<script>parent.is_check_dupe=true;</script>";
 }
 ?>

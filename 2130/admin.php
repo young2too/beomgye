@@ -11,9 +11,9 @@ function write_db_admin(){
     PW,
     NAME
   ) VALUES(
-      $ID,
-      $PW,
-      $NAME
+      '$ID',
+      PASSWORD('$PW'),
+      '$NAME'
   )
   ");
 }
@@ -27,6 +27,7 @@ function write_db_admin(){
 </head>
 <script>
   window.opener = window.location.href; self.close();
+  alert("등록 완료!");
 </script>
 <body>
   <?php

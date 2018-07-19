@@ -3,7 +3,12 @@ session_start();
 function check_login(){
   $logined_id = $_POST['loginid'];
   $logined_pw = $_POST['loginpw'];
-  $query_str = " SELECT * FROM admin WHERE ID= '$logined_id' and PW= '$logined_pw'";
+  $query_str = "
+   SELECT *
+   FROM admin
+   WHERE ID= '$logined_id' and
+         PW= PASSWORD('$logined_pw')
+         ";
   $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
   $result_set = mysqli_query($conn, $query_str) or die(mysqli_error($conn));
   while ($row = mysqli_fetch_array($result_set)){
@@ -13,13 +18,15 @@ function check_login(){
       return true;
     }
   }
-  echo "<script>alert('아이디 또는 패스워드가 잘못되었습니다.');history.back();</script>";
+  echo "<script>
+  alert('아이디 또는 패스워드가 잘못되었습니다.');
+  history.back();
+  </script>";
   mysqli_close($conn);
   return false;
 }
 
 function valid_login($Name){
-
   $_SESSION['is_login']=true;
   $_SESSION['admin_name']=$Name;
   header("Location: ./index.php");
