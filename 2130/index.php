@@ -14,7 +14,8 @@ function is_logined(){
 
 function show_ranking(){
   $row_num = 1;
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   $sql_ranking_query = "
   SELECT  *
   FROM `player_record`
@@ -23,16 +24,86 @@ function show_ranking(){
   $result_set = mysqli_query($conn, $sql_ranking_query) or die(mysqli_error($conn));
   while($row = mysqli_fetch_array($result_set)){
     $print_Name = $row['NAME'];
-    $print_Ave_Score = $row['AVE_SCORE'];
-    $print_Sum_Score = $row['SUM_SCORE'];
-    $print_UMA = $row['UMA'];
-    $print_Star = $row['STAR'];
-    $print_Ave_UMA = $row['AVE_UMA'];
-    $print_1st = $row['1ST'];
-    $print_2nd = $row['2ND'];
-    $print_3rd = $row['3RD'];
-    $print_4th = $row['4TH'];
-    $print_Game_Count = $row['GAME_COUNT'];
+
+    $print_1st = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('1st_name') as 1st
+            FROM game_record
+            WHERE game_record.1st_name='$print_Name'
+    "))['1st'];
+
+    $print_2nd = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('2nd_name') as 2nd
+            FROM game_record
+            WHERE game_record.2nd_name='$print_Name'
+    "))['2nd'];
+    $print_3rd = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('3rd_name') as 3rd
+            FROM game_record
+            WHERE game_record.3rd_name='$print_Name'
+    "))['3rd'];
+
+    $print_4th = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('4th_name') as 4th
+            FROM game_record
+            WHERE game_record.4th_name='$print_Name'
+    "))['4th'];
+    $print_Game_Count = $print_1st+$print_2nd+$print_3rd+$print_4th;
+
+    $temp_1st_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.1st_score),0) as 1st_sum
+                FROM game_record
+                WHERE game_record.1st_name='$print_Name')
+    "))['1st_sum'];
+    $temp_2nd_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.2nd_score),0) as 2nd_sum
+                FROM game_record
+                WHERE game_record.2nd_name='$print_Name')
+    "))['2nd_sum'];
+    $temp_3rd_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.3rd_score),0) as 3rd_sum
+                FROM game_record
+                WHERE game_record.3rd_name='$print_Name')
+    "))['3rd_sum'];
+    $temp_4th_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.4th_score),0) as 4th_sum
+                FROM game_record
+                WHERE game_record.4th_name='$print_Name')
+    "))['4th_sum'];
+
+    $print_Sum_Score = $temp_1st_score_sum+$temp_2nd_score_sum+$temp_3rd_score_sum+$temp_4th_score_sum;
+
+    $print_Ave_Score = $print_Sum_Score/$print_Game_Count;
+
+    $temp_1st_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.1st_star),0) as 1st_star
+            FROM game_record
+            WHERE game_record.1st_name='$print_Name')
+    "))['1st_star'];
+    $temp_2nd_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.2nd_star),0) as 2nd_star
+            FROM game_record
+            WHERE game_record.2nd_name='$print_Name')
+    "))['2nd_star'];
+    $temp_3rd_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.3rd_star),0) as 3rd_star
+            FROM game_record
+            WHERE game_record.3rd_name='$print_Name')
+    "))['3rd_star'];
+    $temp_4th_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.4th_star),0) as 4th_star
+            FROM game_record
+            WHERE game_record.4th_name='$print_Name')
+    "))['4th_star'];
+
+
+
+    $print_Star = $temp_1st_star+$temp_2nd_star+$temp_3rd_star+$temp_4th_star;
+
+    $print_UMA = ($print_Sum_Score-($print_Game_Count*25000))/1000+($print_1st*30+$print_2nd*10-$print_3rd*10-$print_4th*30);
+
+    $print_Ave_UMA = $print_UMA/$print_Game_Count;
+
+
 
 
     echo "<script>
@@ -59,7 +130,7 @@ function show_ranking(){
 <head>
   <meta charset="utf-8">
   <title>
-    내가 만드는 기록사이트
+    마작기록사이트
   </title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="table.css">
@@ -121,7 +192,8 @@ function print_result_into_cell(record_result){
 </script>
 
 <body>
-  <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
+  <h2>메인 페이지</h2>
   <hr>
   <div class="grid1">
     <div class="adminlogin">

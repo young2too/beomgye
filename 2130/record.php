@@ -54,7 +54,8 @@ function write_record(){
   $fourth_star = (int)($Records[3][2]);
   $fourth_name = $Records[3][0];
 
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   $sql_query = "
   INSERT INTO game_record (
     game_id,

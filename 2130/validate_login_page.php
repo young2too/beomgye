@@ -9,7 +9,8 @@ function check_login(){
    WHERE ID= '$logined_id' and
          PW= PASSWORD('$logined_pw')
          ";
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   $result_set = mysqli_query($conn, $query_str) or die(mysqli_error($conn));
   while ($row = mysqli_fetch_array($result_set)){
     if($row['ID'] == $logined_id){
@@ -29,7 +30,7 @@ function check_login(){
 function valid_login($Name){
   $_SESSION['is_login']=true;
   $_SESSION['admin_name']=$Name;
-  header("Location: ./index.php");
+  echo "<script>window.open('index.php','_self');</script>";
 }
 ?>
 

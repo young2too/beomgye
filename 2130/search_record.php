@@ -5,7 +5,8 @@ function start_search(){
   $search_name = $_POST['name_4_search'];//찾는 이름
   $start_date = $_POST['date_4_search_start'];//날짜의 시작
   $end_date = $_POST['date_4_search_end'];//날짜의 끝
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   //db 연결하
 
   if(empty($search_name) == true){//이름이 공란이라면 날짜만으로 검색
@@ -132,21 +133,21 @@ function sidememu_user_or_manager(){
       document.getElementById('1st').innerHTML="<a class='vertical' href='index.php'>처음으로</a>";
       document.getElementById('2nd').innerHTML="<span style='color :red;'>전적검색</span>";
       document.getElementById('3rd').innerHTML="<a class='vertical' href='name_reg_page.php'>닉네임 등록</a>";
-      document.getElementById('4th').innerHTML="";
+      document.getElementById('4th').style.visibility='hidden';
   }
 }
 </script>
 <body>
-  <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
   <h2>검색결과 페이지</h2>
   <hr>
   <div class="wrap_search_record">
     <div class="sidemenu">
       <ul type="">
-        <li id="1st"><a href="admin_page.html">전적등록</a></li>
-        <li id="2nd"><span style="color :red;">전적삭제</span></li>
-        <li id="3rd">전적갱신</li>
-        <li id="4th"><a href="index.php">처음으로</a></li>
+        <li class="vertical" onclick="window.open('admin_page.html','_self')" id="1st"><a class="vertical">전적등록</a></li>
+        <li class="vertical" id="2nd"><span style="color :red;">전적삭제</span></li>
+        <li class="vertical" onclick="window.open('refresh_player_record.php','_self')" id="3rd">전적갱신</li>
+        <li class="vertical" onclick="window.open('index.php','_self')" id="4th"><a href="index.php">처음으로</a></li>
       </ul>
     </div>
     <div class="search_table_content">
