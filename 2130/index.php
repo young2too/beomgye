@@ -14,7 +14,7 @@ function is_logined(){
 
 function show_ranking(){
   $row_num = 1;
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  $conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
   $sql_ranking_query = "
   SELECT  *
   FROM `player_record`
@@ -24,16 +24,19 @@ function show_ranking(){
   while($row = mysqli_fetch_array($result_set)){
     $print_Name = $row['NAME'];
 
-    $print_Ave_Score = $row['AVE_SCORE'];
-    $print_Sum_Score = $row['SUM_SCORE'];
-    $print_UMA = $row['UMA'];
-    $print_Star = $row['STAR'];
-    $print_Ave_UMA = $row['AVE_UMA'];
     $print_1st = $row['1ST'];
     $print_2nd = $row['2ND'];
     $print_3rd = $row['3RD'];
     $print_4th = $row['4TH'];
     $print_Game_Count = $row['GAME_COUNT'];
+
+    $print_Ave_Score = $row['AVE_SCORE'];
+    $print_Sum_Score = $row['SUM_SCORE'];
+    $print_UMA = $row['UMA'];
+    $print_Star = $row['STAR'];
+    $print_Ave_UMA = $row['AVE_UMA'];
+
+
 
 
     echo "<script>

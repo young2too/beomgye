@@ -5,7 +5,7 @@ function start_search(){
   $search_name = $_POST['name_4_search'];//찾는 이름
   $start_date = $_POST['date_4_search_start'];//날짜의 시작
   $end_date = $_POST['date_4_search_end'];//날짜의 끝
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  $conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
   //db 연결하
 
   if(empty($search_name) == true){//이름이 공란이라면 날짜만으로 검색
@@ -143,10 +143,10 @@ function sidememu_user_or_manager(){
   <div class="wrap_search_record">
     <div class="sidemenu">
       <ul type="">
-        <li class="vertical" id="1st"><a href="admin_page.html">전적등록</a></li>
+        <li class="vertical" onclick="window.open('admin_page.html','_self')" id="1st"><a class="vertical">전적등록</a></li>
         <li class="vertical" id="2nd"><span style="color :red;">전적삭제</span></li>
-        <li class="vertical" id="3rd">전적갱신</li>
-        <li class="vertical" id="4th"><a href="index.php">처음으로</a></li>
+        <li class="vertical" onclick="window.open('refresh_player_record.php','_self')" id="3rd">전적갱신</li>
+        <li class="vertical" onclick="window.open('index.php','_self')" id="4th"><a href="index.php">처음으로</a></li>
       </ul>
     </div>
     <div class="search_table_content">

@@ -28,7 +28,7 @@ FROM player_record
 WHERE NAME = '$Buk_Name'
 ";
 
-$conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
 //각각의 쿼리문을 모두 돌려 다른 결과에 저장
 $result_set_dong = mysqli_query($conn, $query_str_dong) or die(mysqli_error($conn));
 $result_set_nam = mysqli_query($conn, $query_str_nam) or die(mysqli_error($conn));

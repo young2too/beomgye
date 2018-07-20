@@ -1,5 +1,5 @@
 <?php
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  $conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
 
   $sql_start_query="
   SELECT NAME

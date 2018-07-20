@@ -1,6 +1,6 @@
 <?php
 $sup_pass = $_GET['admin_pass'];
-$conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+$conn = mysqli_connect("localhost", "root", "12301230", "lyg");
 $sql_query ="
 SELECT *
 FROM super_admin
