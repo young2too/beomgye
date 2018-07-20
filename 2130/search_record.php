@@ -132,7 +132,7 @@ function sidememu_user_or_manager(){
       document.getElementById('1st').innerHTML="<a class='vertical' href='index.php'>처음으로</a>";
       document.getElementById('2nd').innerHTML="<span style='color :red;'>전적검색</span>";
       document.getElementById('3rd').innerHTML="<a class='vertical' href='name_reg_page.php'>닉네임 등록</a>";
-      document.getElementById('4th').innerHTML="";
+      document.getElementById('4th').style.visibility='hidden';
   }
 }
 </script>
@@ -143,10 +143,10 @@ function sidememu_user_or_manager(){
   <div class="wrap_search_record">
     <div class="sidemenu">
       <ul type="">
-        <li id="1st"><a href="admin_page.html">전적등록</a></li>
-        <li id="2nd"><span style="color :red;">전적삭제</span></li>
-        <li id="3rd">전적갱신</li>
-        <li id="4th"><a href="index.php">처음으로</a></li>
+        <li class="vertical" id="1st"><a href="admin_page.html">전적등록</a></li>
+        <li class="vertical" id="2nd"><span style="color :red;">전적삭제</span></li>
+        <li class="vertical" id="3rd">전적갱신</li>
+        <li class="vertical" id="4th"><a href="index.php">처음으로</a></li>
       </ul>
     </div>
     <div class="search_table_content">

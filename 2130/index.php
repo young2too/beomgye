@@ -23,6 +23,7 @@ function show_ranking(){
   $result_set = mysqli_query($conn, $sql_ranking_query) or die(mysqli_error($conn));
   while($row = mysqli_fetch_array($result_set)){
     $print_Name = $row['NAME'];
+
     $print_Ave_Score = $row['AVE_SCORE'];
     $print_Sum_Score = $row['SUM_SCORE'];
     $print_UMA = $row['UMA'];
@@ -122,6 +123,7 @@ function print_result_into_cell(record_result){
 
 <body>
   <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h2>메인 페이지</h2>
   <hr>
   <div class="grid1">
     <div class="adminlogin">
