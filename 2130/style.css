@@ -35,11 +35,23 @@ a.horizen{
 }
 
 ul{
-  list-style-type: none;
 }
 
 li{
   margin: 40px 0;
+}
+
+li.vertical{
+  display: block;
+  padding : 20px;
+  border-style: outset;
+  margin-right : 60px;
+  text-align:center;
+  cursor: pointer;
+}
+
+li.vertical:hover{
+  box-shadow: 2px 2px 4px yellow;
 }
 
 nav ul li.horizen{
@@ -49,8 +61,14 @@ nav ul li.horizen{
 }
 nav ul li.horizen:first-child{border-left:none;}
 
-input[type=button]{
+input[type=button],input[type=submit]{
   cursor: pointer;
+  border-radius: 10px;
+  border-style: outset;
+}
+input[type=button]:hover,input[type=submit]:hover{
+  background :linear-gradient(gray,white);
+  box-shadow: 2px 2px 4px gray;
 }
 
 tr:first-child{
@@ -102,7 +120,6 @@ input.search_btn_class{
 div.grid1{
   border : none;
   height : 700px;
-  /* width : 1407px; */
 }
 
 div.grid2{
@@ -114,7 +131,6 @@ div.grid2{
 div.main_content{
   overflow: scroll;
   height:700px;
-  /* width:1150px; */
 }
 
 div.adminlogin{
@@ -122,18 +138,30 @@ div.adminlogin{
   height: 700px;
   width: 240px;
   float:left;
+  radius :25px;
 }
 
 div.loginform{
   width:inherit;
+  text-align: center;
+}
+div.admin_login_is_here_div{
+  text-align: center;
+  background: linear-gradient(blue, skyblue);
+  border-style: outset;
+  color : white;
+  font-style: bold;
+  font-size: 16px;
 }
 
 div.sidemenu{
   width:240px;
   float:left;
+  text-align: center;
 }
 
 div.footer{
+  text-align: center;
   position: relative;
   border: 1px solid black;
   height:5%;
@@ -169,6 +197,13 @@ div.delete_btn{
   font-style: bold;
 }
 
+div.login_manager_text_div{
+  padding : 20px 40px;
+}
+
+div.wrapping_index_btn{
+
+}
 
 a{
   text-decoration: none;

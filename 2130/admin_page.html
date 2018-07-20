@@ -31,11 +31,11 @@ function check_submit(){
     var temp_seo_name = document.getElementsByName("seo_name")[0].value;
     var temp_buk_name = document.getElementsByName("buk_name")[0].value;
     is_name_registed.location.href ="./check_name_registed.php?dong_name="+temp_dong_name+"&nam_name="+temp_nam_name+"&seo_name="+temp_seo_name+"&buk_name="+temp_buk_name;
+  }
 
-    if(is_all_id_checked == true){
-      document.getElementById('score_form').submit();
-      is_all_id_checked=false;
-    }
+  if(is_all_id_checked == true){
+    document.getElementById('score_form').submit();
+    is_all_id_checked=false;
   }
 }
 </script>
@@ -46,10 +46,10 @@ function check_submit(){
   <hr>
   <div class="sidemenu">
     <ul type="">
-      <li><span style="color :red;">전적등록</span></li>
-      <li><a href="delete_record.html">전적삭제</a></li>
-      <li>전적갱신</li>
-      <li><a href="index.php">처음으로</a></li>
+      <li class="vertical"><span style="color :red;">전적등록</span></li>
+      <li class="vertical" onclick="window.open('delete_record.html','_self')"><a class="vertical">전적삭제</a></li>
+      <li class="vertical" onclick="window.open('refresh_player_record.php','_self')"><a class="vertical">전적갱신</a></li>
+      <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical">처음으로</a></li>
     </ul>
   </div>
   <div class="reg">

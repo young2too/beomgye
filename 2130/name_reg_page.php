@@ -95,32 +95,41 @@ function check_name_submit(){
   <div class="grid1">
     <div class="adminlogin">
       <div class="loginedform" id="loginedform">
-        <?php
-        if(isset($_SESSION['is_login'])==true){
-          echo $_SESSION['admin_name'] . " 관리자님 로그인 되었습니다";
-        }
-        ?>
-        <br>
-        <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.html'">
-        <input type="button" name="logout" value="로그아웃" onclick="location.href='logout.php'">
+        <div class="login_manager_text_div">
+          <?php
+          if(isset($_SESSION['is_login'])==true){
+            echo $_SESSION['admin_name'] . " 관리자님 로그인 되었습니다";
+          }
+          ?>
+          <br>
+        </div>
+        <div class="wrapping_index_btn">
+          <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.html'">
+          <input type="button" name="logout" value="로그아웃" onclick="location.href='logout.php'">
+        </div>
+        <hr>
       </div>
       <div class="loginform" id="loginform">
+        <div class="admin_login_is_here_div">
+          관리자 로그인
+        </div>
         <form action="validate_login_page.php" accept-charset="utf-8" id="login_form" method="POST">
           <input type="text" placeholder="관리자 ID 입력" id="loginid" name="loginid"><br>
           <input type="password" id="loginpw" name="loginpw"><br>
           <input type="button" value="&nbsp&nbsp&nbsp 로그인 &nbsp&nbsp" name="loginok" onclick="login_ok()">
           <input type="button" value="관리자등록" name="reg_admin" onclick="check_admin()">
         </form>
+        <hr>
       </div>
-      <hr>
       <div class="sidemenu">
         <ul>
-          <li><a class="vertical" href="index.php">처음으로</a></li>
-          <li><a class="vertical" href="search_record_user.html">전적검색</a></li>
-          <li><a class="vertical" href="name_reg_page.php"><span style="color :red;">닉네임 등록</span></a></li>
+          <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical" >처음으로</a></li>
+          <li class="vertical" onclick="window.open('search_record_user.html','_self')"><a class="vertical">전적검색</a></li>
+          <li class="vertical" onclick="window.open('name_reg_page.php','_self')"><a class="vertical">닉네임 등록</a></li>
         </ul>
       </div>
     </div>
+
     <div class="main_content">
       <div class="reg">
         <form action="name_reg.php" method="post" id="name_reg_form" name="name_reg_form">

@@ -4,7 +4,7 @@ function write_db_name(){
   #다른 주소라면 localhost 대신에 mysql 서버 컴퓨터의 ip를 적어넣'
   $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
   mysqli_query($conn, "
-  INSERT INTO admin (
+  INSERT INTO player_record (
     NAME
   ) VALUES(
       '$NAME'
@@ -22,5 +22,9 @@ function write_db_name(){
     <?php
     write_db_name();
      ?>
+     <script>
+     alert("닉네임 등록되었습니다!");
+     window.open('index.php','_self');
+     </script>
   </body>
 </html>

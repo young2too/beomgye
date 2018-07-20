@@ -16,34 +16,35 @@ function start_search(){
     ";
   }
   else{//이름이 공란이 아니라면 날짜와 and 조건으로 검색
+    echo "<script>_player_name='$search_name'</script>";
     $sql_query = "
     SELECT *
     FROM game_record
     WHERE (DATE BETWEEN '$start_date' and '$end_date')
-    and (Dong_name = '$search_name'
-    or Nam_name = '$search_name'
-    or Seo_name = '$search_name'
-    or Buk_name = '$search_name')";
+    and (1st_name = '$search_name'
+    or 2nd_name = '$search_name'
+    or 3rd_name = '$search_name'
+    or 4th_name = '$search_name')";
   }
   $result_set = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
   $max = mysqli_num_rows($result_set);
   while($row = mysqli_fetch_array($result_set)){
 
     $print_game_id = $row['game_id'];
-    $print_Dong_name = $row['Dong_name'];
-    $print_Nam_name = $row['Nam_name'];
-    $print_Seo_name = $row['Seo_name'];
-    $print_Buk_name = $row['Buk_name'];
+    $print_1st_name = $row['1st_name'];
+    $print_2nd_name = $row['2nd_name'];
+    $print_3rd_name = $row['3rd_name'];
+    $print_4th_name = $row['4th_name'];
 
-    $print_Dong_score = $row['Dong_score'];
-    $print_Nam_score = $row['Nam_score'];
-    $print_Seo_score = $row['Seo_score'];
-    $print_Buk_score = $row['Buk_score'];
+    $print_1st_score = $row['1st_score'];
+    $print_2nd_score = $row['2nd_score'];
+    $print_3rd_score = $row['3rd_score'];
+    $print_4th_score = $row['4th_score'];
 
-    $print_Dong_star = $row['Dong_star'];
-    $print_Nam_star = $row['Nam_star'];
-    $print_Seo_star = $row['Seo_star'];
-    $print_Buk_star = $row['Buk_star'];
+    $print_1st_star = $row['1st_star'];
+    $print_2nd_star = $row['2nd_star'];
+    $print_3rd_star = $row['3rd_star'];
+    $print_4th_star = $row['4th_star'];
 
     $date = date_create($row['Date']);
     $print_date = date_format($date,'ymd');
@@ -51,20 +52,20 @@ function start_search(){
     echo "<script>
     print_result_into_cell($print_game_id)
 
-    print_result_into_cell($print_Dong_name)
-    print_result_into_cell($print_Nam_name)
-    print_result_into_cell($print_Seo_name)
-    print_result_into_cell($print_Buk_name)
+    print_result_into_cell('$print_1st_name')
+    print_result_into_cell('$print_2nd_name')
+    print_result_into_cell('$print_3rd_name')
+    print_result_into_cell('$print_4th_name')
 
-    print_result_into_cell($print_Dong_score)
-    print_result_into_cell($print_Nam_score)
-    print_result_into_cell($print_Seo_score)
-    print_result_into_cell($print_Buk_score)
+    print_result_into_cell($print_1st_score)
+    print_result_into_cell($print_2nd_score)
+    print_result_into_cell($print_3rd_score)
+    print_result_into_cell($print_4th_score)
 
-    print_result_into_cell($print_Dong_star)
-    print_result_into_cell($print_Nam_star)
-    print_result_into_cell($print_Seo_star)
-    print_result_into_cell($print_Buk_star)
+    print_result_into_cell($print_1st_star)
+    print_result_into_cell($print_2nd_star)
+    print_result_into_cell($print_3rd_star)
+    print_result_into_cell($print_4th_star)
 
     print_result_into_cell($print_date)
     </script>";
@@ -82,28 +83,35 @@ function start_search(){
 </head>
 <link rel="stylesheet" href="table.css?ver=0">
 <link rel="stylesheet" href="style.css?ver=1">
+
 <script>
 var MAX_ROWS = 14;
 var _index = 0;
 var _rowcount = 1;
 var _login_check = false;
-
+var _player_name = "";
 
 function print_result_into_cell(record_result){
+
 
   var newDiv=document.createElement('DIV'); // DIV 객체 생성
   newDiv.setAttribute('class','divTableCell'); // class 지정
   if(_index == 0){
     newDiv.setAttribute('id','div_cell_'+_rowcount);
   }
-  newDiv.innerHTML=record_result; // 객체에 포함할 텍스트
+  if(_player_name!=""&&record_result==_player_name){
+    newDiv.innerHTML="<b><font color=red>"+record_result+"</b>";
+  }
+  else{
+
+    newDiv.innerHTML=record_result; // 객체에 포함할 텍스트
+  }
   document.getElementsByClassName('divTableRow')[_rowcount].appendChild(newDiv); // _rowcount번쨰 row의 자식 노드로 첨부
 
 
   _index ++;
   if(_index==MAX_ROWS){
     if(_login_check==true){//관리자라면 삭제버튼 끝에 추가
-
       var newBtn=document.createElement('BUTTON');
       var btn_connect_id_cell = document.getElementById('div_cell_'+_rowcount).innerHTML;//버튼과 같은 줄의 이름 셀의 내용을 복사
       newBtn.setAttribute('class', 'delete_btn'+_rowcount);
@@ -146,18 +154,18 @@ function sidememu_user_or_manager(){
         <div class="divTableHeading">
           <div class="divTableRow">
             <div class="divTableHead">game_id</div>
-            <div class="divTableHead">동</div>
-            <div class="divTableHead">남</div>
-            <div class="divTableHead">서</div>
-            <div class="divTableHead">북</div>
-            <div class="divTableHead">동 점수</div>
-            <div class="divTableHead">남 점수</div>
-            <div class="divTableHead">서 점수</div>
-            <div class="divTableHead">북 점수</div>
-            <div class="divTableHead">동 별</div>
-            <div class="divTableHead">남 별</div>
-            <div class="divTableHead">서 별</div>
-            <div class="divTableHead">북 별</div>
+            <div class="divTableHead">1등</div>
+            <div class="divTableHead">2등</div>
+            <div class="divTableHead">3등</div>
+            <div class="divTableHead">4등</div>
+            <div class="divTableHead">1등 점수</div>
+            <div class="divTableHead">2등 점수</div>
+            <div class="divTableHead">3등 점수</div>
+            <div class="divTableHead">4등 점수</div>
+            <div class="divTableHead">1등 별</div>
+            <div class="divTableHead">2등 별</div>
+            <div class="divTableHead">3등 별</div>
+            <div class="divTableHead">4등 별</div>
             <div class="divTableHead">일시</div>
           </div>
         </div>
