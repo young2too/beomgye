@@ -6,16 +6,37 @@
   <link rel="stylesheet" href="style.css?ver=1">
 </head>
 <script>
+var is_all_id_checked = false;
+
 function check_submit(){
   var putin = document.getElementsByClassName('score_putin');
   var i;
-  for(i=0;i<putin.length;i++){
+  for(i=0;i<putin.length;i++){//입력을 다 했는지를 확인하는 부분
     if(putin[i].value == ""){
       alert("채우지 않은 값이 있습니다!");
       return putin[i].focus();
     }
   }
-  document.getElementById('score_form').submit();
+  if(parseInt(document.getElementsByName('dong_score')[0].value)
+  + parseInt(document.getElementsByName('nam_score')[0].value)
+  + parseInt(document.getElementsByName('seo_score')[0].value)
+  + parseInt(document.getElementsByName('buk_score')[0].value)
+  != 100000){//점수 합이맞는지 확인하는 부분
+    alert("점수 합이 맞지 않습니다!");
+    return;
+  }
+  else{//이름이 등록되어있는지 확인하는 부분
+    var temp_dong_name = document.getElementsByName('dong_name')[0].value;
+    var temp_nam_name = document.getElementsByName("nam_name")[0].value;
+    var temp_seo_name = document.getElementsByName("seo_name")[0].value;
+    var temp_buk_name = document.getElementsByName("buk_name")[0].value;
+    is_name_registed.location.href ="./check_name_registed.php?dong_name="+temp_dong_name+"&nam_name="+temp_nam_name+"&seo_name="+temp_seo_name+"&buk_name="+temp_buk_name;
+  }
+
+  if(is_all_id_checked == true){
+    document.getElementById('score_form').submit();
+    is_all_id_checked=false;
+  }
 }
 </script>
 
@@ -25,10 +46,10 @@ function check_submit(){
   <hr>
   <div class="sidemenu">
     <ul type="">
-      <li><span style="color :red;">전적등록</span></li>
-      <li><a href="delete_record.html">전적삭제</a></li>
-      <li>전적갱신</li>
-      <li><a href="index.php">처음으로</a></li>
+      <li class="vertical"><span style="color :red;">전적등록</span></li>
+      <li class="vertical" onclick="window.open('delete_record.html','_self')"><a class="vertical">전적삭제</a></li>
+      <li class="vertical" onclick="window.open('refresh_player_record.php','_self')"><a class="vertical">전적갱신</a></li>
+      <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical">처음으로</a></li>
     </ul>
   </div>
   <div class="reg">
@@ -43,5 +64,16 @@ function check_submit(){
       </fieldset>
     </form>
   </div>
+  <div class="footer">
+    <nav>
+      <ul>
+        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen">young2too13@gmail.com</li>
+        <li class="horizen">Tel 010-123-1234</li>
+        <li class="horizen">ver 0.0.1</li>
+      </ul>
+    </nav>
+  </div>
+  <iframe id="is_name_registed" scrolling="no" frameborder="no" width="0" height="0" name="is_name_registed"></iframe>
 </body>
 </html>

@@ -5,15 +5,16 @@ function write_db_admin(){
   $NAME = $_POST['admin_name'];
   #다른 주소라면 localhost 대신에 mysql 서버 컴퓨터의 ip를 적어넣'
   $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+
   mysqli_query($conn, "
   INSERT INTO admin (
     ID,
     PW,
     NAME
   ) VALUES(
-      $ID,
-      $PW,
-      $NAME
+      '$ID',
+      PASSWORD('$PW'),
+      '$NAME'
   )
   ");
 }
@@ -26,7 +27,8 @@ function write_db_admin(){
   <title>관리자 등록중</title>
 </head>
 <script>
-  window.opener = window.location.href; self.close();
+  window.open('index.php','_self');
+  alert("등록 완료!");
 </script>
 <body>
   <?php

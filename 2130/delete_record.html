@@ -13,10 +13,10 @@
   <hr>
   <div class="sidemenu">
     <ul type="">
-      <li><a href="admin_page.html">전적등록</a></li>
-      <li><span style="color :red;">전적삭제</span></li>
-      <li>전적갱신</li>
-      <li><a href="index.php">처음으로</a></li>
+      <li class="vertical" onclick="window.open('admin_page.html','_self')"><a class="vertical">전적등록</a></li>
+      <li class="vertical"><span style="color :red;">전적삭제</span></li>
+      <li class="vertical" onclick="window.open('refresh_player_record.php','_self')"><a class="vertical">전적갱신</a></li>
+      <li class="vertical" oncanplay="window.open()'idnex.php','_self'"><a class="vertical">처음으로</a></li>
     </ul>
   </div>
   <div class="reg">
@@ -27,11 +27,21 @@
         <input class="search_date" type="date" name="date_4_search_start" >~
         <input class="search_date" type="date" name="date_4_search_end" >
       </label>
-      <input type="submit" value="검색" name="search_btn">
+      <input class="search_btn_class" type="submit" value="검색" name="search_btn">
       </form>
     </div>
+    <div class="footer">
+      <nav>
+        <ul>
+          <li class="horizen">가로메뉴 연습</li>
+          <li class="horizen">young2too13@gmail.com</li>
+          <li class="horizen">Tel 010-123-1234</li>
+          <li class="horizen">ver 0.0.1</li>
+        </ul>
+      </nav>
+    </div>
     <script>
-    //initialize the input date
+    //오늘 날짜로 초기화
     var x = document.getElementsByClassName('search_date');
     var i=0;
     for(i=0;i<x.length;i++){
