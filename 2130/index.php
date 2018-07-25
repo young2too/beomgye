@@ -14,7 +14,8 @@ function is_logined(){
 
 function show_ranking(){
   $row_num = 1;
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");//웹호스팅시 비밀번호
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   $sql_ranking_query = "
   SELECT  *
   FROM `player_record`
@@ -24,31 +25,107 @@ function show_ranking(){
   while($row = mysqli_fetch_array($result_set)){
     $print_Name = $row['NAME'];
 
-    $print_Ave_Score = $row['AVE_SCORE'];
-    $print_Sum_Score = $row['SUM_SCORE'];
-    $print_UMA = $row['UMA'];
-    $print_Star = $row['STAR'];
-    $print_Ave_UMA = $row['AVE_UMA'];
-    $print_1st = $row['1ST'];
-    $print_2nd = $row['2ND'];
-    $print_3rd = $row['3RD'];
-    $print_4th = $row['4TH'];
-    $print_Game_Count = $row['GAME_COUNT'];
+    $print_1st = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('1st_name') as 1st
+    FROM game_record
+    WHERE game_record.1st_name='$print_Name'
+    "))['1st'];
+
+    $print_2nd = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('2nd_name') as 2nd
+    FROM game_record
+    WHERE game_record.2nd_name='$print_Name'
+    "))['2nd'];
+    $print_3rd = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('3rd_name') as 3rd
+    FROM game_record
+    WHERE game_record.3rd_name='$print_Name'
+    "))['3rd'];
+
+    $print_4th = mysqli_fetch_array(mysqli_query($conn,"
+    SELECT COUNT('4th_name') as 4th
+    FROM game_record
+    WHERE game_record.4th_name='$print_Name'
+    "))['4th'];
+    $print_Game_Count = $print_1st+$print_2nd+$print_3rd+$print_4th;
+
+    $temp_1st_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.1st_score),0) as 1st_sum
+    FROM game_record
+    WHERE game_record.1st_name='$print_Name')
+    "))['1st_sum'];
+    $temp_2nd_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.2nd_score),0) as 2nd_sum
+    FROM game_record
+    WHERE game_record.2nd_name='$print_Name')
+    "))['2nd_sum'];
+    $temp_3rd_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.3rd_score),0) as 3rd_sum
+    FROM game_record
+    WHERE game_record.3rd_name='$print_Name')
+    "))['3rd_sum'];
+    $temp_4th_score_sum = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.4th_score),0) as 4th_sum
+    FROM game_record
+    WHERE game_record.4th_name='$print_Name')
+    "))['4th_sum'];
+
+    $print_Sum_Score = $temp_1st_score_sum+$temp_2nd_score_sum+$temp_3rd_score_sum+$temp_4th_score_sum;
+
+
+
+    $temp_1st_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.1st_star),0) as 1st_star
+    FROM game_record
+    WHERE game_record.1st_name='$print_Name')
+    "))['1st_star'];
+    $temp_2nd_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.2nd_star),0) as 2nd_star
+    FROM game_record
+    WHERE game_record.2nd_name='$print_Name')
+    "))['2nd_star'];
+    $temp_3rd_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.3rd_star),0) as 3rd_star
+    FROM game_record
+    WHERE game_record.3rd_name='$print_Name')
+    "))['3rd_star'];
+    $temp_4th_star = mysqli_fetch_array(mysqli_query($conn,"
+    (SELECT IFNULL(SUM(game_record.4th_star),0) as 4th_star
+    FROM game_record
+    WHERE game_record.4th_name='$print_Name')
+    "))['4th_star'];
+
+
+
+    $print_Star = $temp_1st_star+$temp_2nd_star+$temp_3rd_star+$temp_4th_star;
+
+    $print_UMA = ($print_Sum_Score-($print_Game_Count*25000))/1000+($print_1st*30+$print_2nd*10-$print_3rd*10-$print_4th*30);
+
+
+    if($print_Game_Count!=0){
+      $print_Ave_Score = round($print_Sum_Score/$print_Game_Count,2);
+      $print_Ave_UMA = round($print_UMA/$print_Game_Count,2);
+    }
+    else{
+      $print_Ave_Score=0;
+      $print_Ave_UMA=0;
+    }
+
 
 
     echo "<script>
-    print_result_into_cell($row_num)
+    print_result_into_cell('$row_num')
     print_result_into_cell('$print_Name')
-    print_result_into_cell($print_Ave_Score)
-    print_result_into_cell($print_Sum_Score)
-    print_result_into_cell($print_UMA)
-    print_result_into_cell($print_Star)
-    print_result_into_cell($print_Ave_UMA)
-    print_result_into_cell($print_1st)
-    print_result_into_cell($print_2nd)
-    print_result_into_cell($print_3rd)
-    print_result_into_cell($print_4th)
-    print_result_into_cell($print_Game_Count)
+    print_result_into_cell('$print_Ave_Score')
+    print_result_into_cell('$print_Sum_Score')
+    print_result_into_cell('$print_UMA')
+    print_result_into_cell('$print_Star')
+    print_result_into_cell('$print_Ave_UMA')
+    print_result_into_cell('$print_1st')
+    print_result_into_cell('$print_2nd')
+    print_result_into_cell('$print_3rd')
+    print_result_into_cell('$print_4th')
+    print_result_into_cell('$print_Game_Count')
     </script>";
     $row_num++;
   }
@@ -60,15 +137,42 @@ function show_ranking(){
 <head>
   <meta charset="utf-8">
   <title>
-    내가 만드는 기록사이트
+    마작기록사이트
   </title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="table.css">
 </head>
 <script>
 var MAX_ROWS = 12;
 var _index = 0;
 var _rowcount = 1;
+
+function getCookie(name){
+  var wcname = name + '=';
+  var wcstart, wcend, end;
+  var i = 0;
+
+  while(i <= document.cookie.length) {
+    wcstart = i;
+    wcend   = (i + wcname.length);
+    if(document.cookie.substring(wcstart, wcend) == wcname) {
+      if((end = document.cookie.indexOf(';', wcend)) == -1)
+      end = document.cookie.length;
+      return document.cookie.substring(wcend, end);
+    }
+
+    i = document.cookie.indexOf('', i) + 1;
+
+    if(i == 0)
+    break;
+  }
+  return '';
+}
+
+if(getCookie('record_site') != 'rangs') {
+  window.open('pop_up_index.html','','width=380,height=300,top=0,left=0');
+}
 
 function login_ok() {
   var input_id = document.getElementById('loginid').value;
@@ -96,9 +200,9 @@ function change_form_logout2login(){
 
 function change_form_login2logout(){
   var logdiv = document.getElementById("loginform");
-    logdiv.style.visibility = "visible";
+  logdiv.style.visibility = "visible";
   var logeddiv = document.getElementById("loginedform");
-    logeddiv.style.visibility = "hidden";
+  logeddiv.style.visibility = "hidden";
 }
 
 
@@ -118,11 +222,19 @@ function print_result_into_cell(record_result){
   }
 }
 
+function join_room(){
+  var room_no = prompt("방번호 입력");
+  if(room_no>1000&&room_no<10000){
+    window.open("http://tenhou.net/0/?"+room_no,"_blank","width=750,height=650,top=300,left=500");
+  }
+  else{
+    alert("1000이상, 10000이하의 숫자 입력");
+  }
 
+}
 </script>
-
 <body>
-  <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
   <h2>메인 페이지</h2>
   <hr>
   <div class="grid1">
@@ -137,7 +249,7 @@ function print_result_into_cell(record_result){
           <br>
         </div>
         <div class="wrapping_index_btn">
-          <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.html'">
+          <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.php'">
           <input type="button" name="logout" value="로그아웃" onclick="location.href='logout.php'">
         </div>
         <hr>
@@ -159,6 +271,8 @@ function print_result_into_cell(record_result){
           <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical" >처음으로</a></li>
           <li class="vertical" onclick="window.open('search_record_user.html','_self')"><a class="vertical">전적검색</a></li>
           <li class="vertical" onclick="window.open('name_reg_page.php','_self')"><a class="vertical">닉네임 등록</a></li>
+          <li class="vertical" onclick="window.open('float_chat.html','_blank', 'width=500,height=400, top=500, left=1000')"><a class="vertical">채팅방 열기</a></li>
+          <li class="vertical" onclick="join_room()"><a class="vertical">게임방 들어가기</a></li>
         </ul>
       </div>
     </div>
@@ -193,19 +307,19 @@ function print_result_into_cell(record_result){
   <div class="footer">
     <nav>
       <ul>
-        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
         <li class="horizen">young2too13@gmail.com</li>
         <li class="horizen">Tel 010-123-1234</li>
-        <li class="horizen">ver 0.0.1</li>
+        <li class="horizen">ver MADE_BY_LYG</li>
       </ul>
     </nav>
   </div>
 
   <iframe id="super_pw_frm" scrolling="no" frameborder="no" width="0" height="0" name="super_pw_frm"></iframe>
   <?php
-    is_logined();
-    show_ranking();
-   ?>
+  is_logined();
+  show_ranking();
+  ?>
 </body>
 
 </html>

@@ -4,8 +4,8 @@ function write_db_admin(){
   $PW = $_POST['admin_pw'];
   $NAME = $_POST['admin_name'];
   #다른 주소라면 localhost 대신에 mysql 서버 컴퓨터의 ip를 적어넣'
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
-
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   mysqli_query($conn, "
   INSERT INTO admin (
     ID,

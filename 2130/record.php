@@ -1,4 +1,5 @@
 <?php
+include_once('update_player_record.php');
 $Rank_count = 4;
 function compare($x, $y){
   if ($x[1] == $y[1] )//두번째 인자가 점수이다. 점수순 정렬
@@ -54,7 +55,8 @@ function write_record(){
   $fourth_star = (int)($Records[3][2]);
   $fourth_name = $Records[3][0];
 
-  $conn = mysqli_connect("localhost", "root", "picopica", "lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   $sql_query = "
   INSERT INTO game_record (
     game_id,
@@ -71,9 +73,6 @@ function write_record(){
       )
       ";
       mysqli_query($conn, $sql_query);
-      //플레이어를 등수대로 정렬해서 데이터베이스에 넣었음
-
-
     }
 
     ?>
@@ -88,9 +87,11 @@ function write_record(){
     <body>
       <?php
       write_record();
+      update_player_DB();
       ?>
       <script>
-      window.open('refresh_player_record.php','_self');//갱신 페이지로
+        alert("등록되었습니다!");
+        window.open("index.php","_self");
       </script>
     </body>
     </html>

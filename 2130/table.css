@@ -4,6 +4,8 @@ div.blueTable {
   text-align: center;
   width:100%;
   min-width: 1000px;
+  max-height: 300px;
+  overflow: scroll;
   border-collapse: collapse;
 }
 .divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead,
