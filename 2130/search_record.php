@@ -5,8 +5,8 @@ function start_search(){
   $search_name = $_POST['name_4_search'];//찾는 이름
   $start_date = $_POST['date_4_search_start'];//날짜의 시작
   $end_date = $_POST['date_4_search_end'];//날짜의 끝
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+  $conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  //$conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   //db 연결하
 
   if(empty($search_name) == true){//이름이 공란이라면 날짜만으로 검색
