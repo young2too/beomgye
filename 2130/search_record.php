@@ -5,7 +5,8 @@ function start_search(){
   $search_name = $_POST['name_4_search'];//찾는 이름
   $start_date = $_POST['date_4_search_start'];//날짜의 시작
   $end_date = $_POST['date_4_search_end'];//날짜의 끝
-  $conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
   //db 연결하
 
   if(empty($search_name) == true){//이름이 공란이라면 날짜만으로 검색
@@ -47,7 +48,7 @@ function start_search(){
     $print_4th_star = $row['4th_star'];
 
     $date = date_create($row['Date']);
-    $print_date = date_format($date,'ymd');
+    $print_date = date_format($date,"y-m-d");
 
     echo "<script>
     print_result_into_cell($print_game_id)
@@ -67,7 +68,7 @@ function start_search(){
     print_result_into_cell($print_3rd_star)
     print_result_into_cell($print_4th_star)
 
-    print_result_into_cell($print_date)
+    print_result_into_cell('$print_date')
     </script>";
   }
 
@@ -137,15 +138,15 @@ function sidememu_user_or_manager(){
 }
 </script>
 <body>
-  <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
   <h2>검색결과 페이지</h2>
   <hr>
   <div class="wrap_search_record">
     <div class="sidemenu">
       <ul type="">
-        <li class="vertical" onclick="window.open('admin_page.html','_self')" id="1st"><a class="vertical">전적등록</a></li>
+        <li class="vertical" onclick="window.open('admin_page.php','_self')" id="1st"><a class="vertical">전적등록</a></li>
         <li class="vertical" id="2nd"><span style="color :red;">전적삭제</span></li>
-        <li class="vertical" onclick="window.open('refresh_player_record.php','_self')" id="3rd">전적갱신</li>
+        <li class="vertical" onclick="window.open('refresh_player_record.php','_self')" id="3rd">전적 불러오기(천봉)</li>
         <li class="vertical" onclick="window.open('index.php','_self')" id="4th"><a href="index.php">처음으로</a></li>
       </ul>
     </div>
@@ -179,10 +180,10 @@ function sidememu_user_or_manager(){
   <div class="footer">
     <nav>
       <ul>
-        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
         <li class="horizen">young2too13@gmail.com</li>
         <li class="horizen">Tel 010-123-1234</li>
-        <li class="horizen">ver 0.0.1</li>
+        <li class="horizen">ver MADE_BY_LYG</li>
       </ul>
     </nav>
   </div>

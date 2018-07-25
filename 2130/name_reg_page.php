@@ -90,7 +90,7 @@ function check_name_submit(){
 
 </script>
 <body>
-  <h1><a class="title" href="index.php">0.0.1</a></h1>
+  <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
   <hr>
   <div class="grid1">
     <div class="adminlogin">
@@ -104,7 +104,7 @@ function check_name_submit(){
           <br>
         </div>
         <div class="wrapping_index_btn">
-          <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.html'">
+          <input type="button" name="score_reg" value="관리자메뉴" onclick="window.location.href='admin_page.php'">
           <input type="button" name="logout" value="로그아웃" onclick="location.href='logout.php'">
         </div>
         <hr>
@@ -126,6 +126,8 @@ function check_name_submit(){
           <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical" >처음으로</a></li>
           <li class="vertical" onclick="window.open('search_record_user.html','_self')"><a class="vertical">전적검색</a></li>
           <li class="vertical" onclick="window.open('name_reg_page.php','_self')"><a class="vertical">닉네임 등록</a></li>
+          <li class="vertical" onclick="window.open('float_chat.html','_blank', 'width=500,height=400, top=500, left=1000')"><a class="vertical">채팅방 열기</a></li>
+          <li class="vertical" onclick="join_room()"><a class="vertical">게임방 들어가기</a></li>
         </ul>
       </div>
     </div>
@@ -146,10 +148,10 @@ function check_name_submit(){
   <div class="footer">
     <nav>
       <ul>
-        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
         <li class="horizen">young2too13@gmail.com</li>
         <li class="horizen">Tel 010-123-1234</li>
-        <li class="horizen">ver 0.0.1</li>
+        <li class="horizen">ver MADE_BY_LYG</li>
       </ul>
     </nav>
   </div>

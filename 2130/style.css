@@ -61,6 +61,13 @@ nav ul li.horizen{
 }
 nav ul li.horizen:first-child{border-left:none;}
 
+li.horizen:hover{
+  border-style:inset;
+  border-radius: 10px;
+  background: linear-gradient(rgb(200,200,255),skyblue);
+  cursor : pointer;
+}
+
 input[type=button],input[type=submit]{
   cursor: pointer;
   border-radius: 10px;
@@ -105,7 +112,7 @@ input{
   margin-right: 20px;
 }
 
-input.score_putin{
+input.score_putin, input.star_putin{
   width:50px;
 }
 
@@ -165,14 +172,16 @@ div.footer{
   border: 1px solid black;
   height:5%;
   clear: both;
+  background: linear-gradient(yellow,rgb(255, 255, 228));
 }
 
 div.reg{
+    text-align: center;
     border-radius: 10px;
     background-color: #f2f2f2;
     padding: 20px;
-    width : 450px;
-    margin : 0 434.5px;
+    width : 500px;
+    margin : 0 auto;
 }
 
 div.loginedform{
@@ -201,9 +210,15 @@ div.login_manager_text_div{
 }
 
 div.wrapping_index_btn{
-
 }
-
 a{
   text-decoration: none;
+}
+
+div.score_sum_div{
+  border-style: outset;
+  background: white;
+  width : 200px;
+  border-radius: 20px;
+  margin : 0 auto;
 }
