@@ -1,4 +1,5 @@
 <?php
+include_once('update_player_record.php');
 $Rank_count = 4;
 function compare($x, $y){
   if ($x[1] == $y[1] )//두번째 인자가 점수이다. 점수순 정렬
@@ -72,9 +73,6 @@ function write_record(){
       )
       ";
       mysqli_query($conn, $sql_query);
-      //플레이어를 등수대로 정렬해서 데이터베이스에 넣었음
-
-
     }
 
     ?>
@@ -89,9 +87,11 @@ function write_record(){
     <body>
       <?php
       write_record();
+      update_player_DB();
       ?>
       <script>
-      window.open('refresh_player_record.php','_self');//갱신 페이지로
+        alert("등록되었습니다!");
+        window.open("index.php","_self");
       </script>
     </body>
     </html>

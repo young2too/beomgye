@@ -48,7 +48,7 @@ function start_search(){
     $print_4th_star = $row['4th_star'];
 
     $date = date_create($row['Date']);
-    $print_date = date_format($date,'ymd');
+    $print_date = date_format($date,"y-m-d");
 
     echo "<script>
     print_result_into_cell($print_game_id)
@@ -68,7 +68,7 @@ function start_search(){
     print_result_into_cell($print_3rd_star)
     print_result_into_cell($print_4th_star)
 
-    print_result_into_cell($print_date)
+    print_result_into_cell('$print_date')
     </script>";
   }
 
@@ -91,6 +91,16 @@ var _index = 0;
 var _rowcount = 1;
 var _login_check = false;
 var _player_name = "";
+
+function join_room(){
+  var room_no = prompt("방번호 입력");
+  if(room_no>1000&&room_no<10000){
+    window.open("http://tenhou.net/0/?"+room_no,"_blank","width=750,height=650,top=300,left=500");
+  }
+  else{
+    alert("1000이상, 10000이하의 숫자 입력");
+  }
+}
 
 function print_result_into_cell(record_result){
 
@@ -128,23 +138,35 @@ function print_result_into_cell(record_result){
     _rowcount++;//행말이 될 때마다 테이블몸뚱아리에 하나씩 추가
   }
 }
+
+
 function sidememu_user_or_manager(){
   if(_login_check == false){
-      document.getElementById('1st').innerHTML="<a class='vertical' href='index.php'>처음으로</a>";
-      document.getElementById('2nd').innerHTML="<span style='color :red;'>전적검색</span>";
-      document.getElementById('3rd').innerHTML="<a class='vertical' href='name_reg_page.php'>닉네임 등록</a>";
-      document.getElementById('4th').style.visibility='hidden';
+    document.getElementById('1st').innerHTML="<a class='vertical' href='index.php'>처음으로</a>";
+    document.getElementById('1st').onclick=function(){window.open('index.php','_self')};
+    document.getElementById('2nd').innerHTML="<span style='color :red;'>전적검색</span>";
+    document.getElementById('2nd').onclick=function(){};
+    document.getElementById('3rd').innerHTML="<a class='vertical' href='name_reg_page.php'>닉네임 등록</a>";
+    document.getElementById('3rd').onclick=function(){window.open('name_reg_page.php','_self')};
+    document.getElementById('4th').innerHTML="<a class='vertical'>채팅방 열기</a>";
+    document.getElementById('4th').onclick=function(){window.open('float_chat.html','_blank', 'width=500,height=400, top=500, left=1000')};
+     var x = document.createElement("LI");
+     x.setAttribute('class','vertical');
+     x.innerHTML="<a class='vertical'>게임방 들어가기</a>";
+     x.onclick=function(){join_room()};
+     document.getElementById('side_ul').appendChild(x);
   }
 }
 </script>
+
 <body>
   <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
   <h2>검색결과 페이지</h2>
   <hr>
   <div class="wrap_search_record">
     <div class="sidemenu">
-      <ul type="">
-        <li class="vertical" onclick="window.open('admin_page.html','_self')" id="1st"><a class="vertical">전적등록</a></li>
+      <ul type="" id="side_ul">
+        <li class="vertical" onclick="window.open('admin_page.php','_self')" id="1st"><a class="vertical">전적등록</a></li>
         <li class="vertical" id="2nd"><span style="color :red;">전적삭제</span></li>
         <li class="vertical" onclick="window.open('refresh_player_record.php','_self')" id="3rd">전적갱신</li>
         <li class="vertical" onclick="window.open('index.php','_self')" id="4th"><a href="index.php">처음으로</a></li>
@@ -180,10 +202,10 @@ function sidememu_user_or_manager(){
   <div class="footer">
     <nav>
       <ul>
-        <li class="horizen">가로메뉴 연습</li>
+        <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
         <li class="horizen">young2too13@gmail.com</li>
         <li class="horizen">Tel 010-123-1234</li>
-        <li class="horizen">ver 0.0.1</li>
+        <li class="horizen">ver MADE_BY_LYG</li>
       </ul>
     </nav>
   </div>
@@ -195,6 +217,6 @@ function sidememu_user_or_manager(){
   ?>
 </body>
 <script>
-  sidememu_user_or_manager();
+sidememu_user_or_manager();
 </script>
 </html>

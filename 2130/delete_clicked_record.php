@@ -1,4 +1,5 @@
 <?php
+include_once('update_player_record.php');
 function delete_db_game_record(){
   $row = $_GET['rowcount'];
   $delete_game_id = $_GET['div_cell_'.$row];
@@ -14,7 +15,9 @@ function delete_db_game_record(){
 
  <?php
  delete_db_game_record();
+ update_player_DB()
   ?>
 <script>
-  window.open('refresh_player_record.php','_self');//갱신 페이지로
+  alert('삭제되었습니다!');
+  window.open('index.php','_self');
 </script>
