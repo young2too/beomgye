@@ -3,8 +3,7 @@ include_once('update_player_record.php');
 function delete_db_game_record(){
   $row = $_GET['rowcount'];
   $delete_game_id = $_GET['div_cell_'.$row];
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+  require_once "db_connect.php";
   $sql_query_delete = "
   DELETE FROM game_record
   WHERE game_id = '$delete_game_id'

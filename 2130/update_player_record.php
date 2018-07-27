@@ -1,7 +1,6 @@
 <?php
   function update_player_DB(){
-    $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
-    //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
+    require_once "db_connect.php";
 
     $sql_start_query="
     SELECT NAME, GAME_COUNT

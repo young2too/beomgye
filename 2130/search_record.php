@@ -5,8 +5,7 @@ function start_search(){
   $search_name = $_POST['name_4_search'];//찾는 이름
   $start_date = $_POST['date_4_search_start'];//날짜의 시작
   $end_date = $_POST['date_4_search_end'];//날짜의 끝
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+  require_once "db_connect.php";
   //db 연결하
 
   if(empty($search_name) == true){//이름이 공란이라면 날짜만으로 검색
@@ -103,8 +102,6 @@ function join_room(){
 }
 
 function print_result_into_cell(record_result){
-
-
   var newDiv=document.createElement('DIV'); // DIV 객체 생성
   newDiv.setAttribute('class','divTableCell'); // class 지정
   if(_index == 0){
@@ -114,11 +111,9 @@ function print_result_into_cell(record_result){
     newDiv.innerHTML="<b><font color=red>"+record_result+"</b>";
   }
   else{
-
     newDiv.innerHTML=record_result; // 객체에 포함할 텍스트
   }
   document.getElementsByClassName('divTableRow')[_rowcount].appendChild(newDiv); // _rowcount번쨰 row의 자식 노드로 첨부
-
 
   _index ++;
   if(_index==MAX_ROWS){
@@ -131,7 +126,6 @@ function print_result_into_cell(record_result){
       document.getElementsByClassName('divTableRow')[_rowcount].appendChild(newBtn);
     }
     _index=0;
-
     var newRowDiv=document.createElement('DIV'); // DIV 객체 생성
     newRowDiv.setAttribute('class','divTableRow'); // id 지정
     document.getElementsByClassName('divTableBody')[0].appendChild(newRowDiv);
@@ -142,19 +136,18 @@ function print_result_into_cell(record_result){
 
 function sidememu_user_or_manager(){
   if(_login_check == false){
-    document.getElementById('1st').innerHTML="<a class='vertical' href='index.php'>처음으로</a>";
-    document.getElementById('1st').onclick=function(){window.open('index.php','_self')};
-    document.getElementById('2nd').innerHTML="<span style='color :red;'>전적검색</span>";
-    document.getElementById('2nd').onclick=function(){};
-    document.getElementById('3rd').innerHTML="<a class='vertical' href='name_reg_page.php'>닉네임 등록</a>";
-    document.getElementById('3rd').onclick=function(){window.open('name_reg_page.php','_self')};
-    document.getElementById('4th').innerHTML="<a class='vertical'>채팅방 열기</a>";
-    document.getElementById('4th').onclick=function(){window.open('float_chat.html','_blank', 'width=500,height=400, top=500, left=1000')};
-     var x = document.createElement("LI");
-     x.setAttribute('class','vertical');
-     x.innerHTML="<a class='vertical'>게임방 들어가기</a>";
-     x.onclick=function(){join_room()};
-     document.getElementById('side_ul').appendChild(x);
+    fetch('sidelist').then(function(response){
+      response.text().then(function(text){
+        document.querySelector('#sideul').innerHTML = text;
+      })
+    });
+  }
+  else{
+    fetch('manager_sidelist').then(function(response){
+      response.text().then(function(text){
+        document.querySelector('#sideul').innerHTML = text;
+      })
+    });
   }
 }
 </script>
@@ -165,11 +158,8 @@ function sidememu_user_or_manager(){
   <hr>
   <div class="wrap_search_record">
     <div class="sidemenu">
-      <ul type="" id="side_ul">
-        <li class="vertical" onclick="window.open('admin_page.php','_self')" id="1st"><a class="vertical">전적등록</a></li>
-        <li class="vertical" id="2nd"><span style="color :red;">전적삭제</span></li>
-        <li class="vertical" onclick="window.open('refresh_player_record.php','_self')" id="3rd">전적갱신</li>
-        <li class="vertical" onclick="window.open('index.php','_self')" id="4th"><a href="index.php">처음으로</a></li>
+      <ul type="" id="sideul">
+
       </ul>
     </div>
     <div class="search_table_content">
@@ -201,11 +191,8 @@ function sidememu_user_or_manager(){
   </div>
   <div class="footer">
     <nav>
-      <ul>
-        <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
-        <li class="horizen">young2too13@gmail.com</li>
-        <li class="horizen">Tel 010-123-1234</li>
-        <li class="horizen">ver MADE_BY_LYG</li>
+      <ul id="footul">
+
       </ul>
     </nav>
   </div>
@@ -218,5 +205,10 @@ function sidememu_user_or_manager(){
 </body>
 <script>
 sidememu_user_or_manager();
+fetch('footlist').then(function(response){
+  response.text().then(function(text){
+    document.querySelector('#footul').innerHTML = text;
+  })
+});
 </script>
 </html>

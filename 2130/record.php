@@ -55,8 +55,11 @@ function write_record(){
   $fourth_star = (int)($Records[3][2]);
   $fourth_name = $Records[3][0];
 
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+
+
+
+
+  require_once "db_connect.php";
   $sql_query = "
   INSERT INTO game_record (
     game_id,
@@ -72,7 +75,15 @@ function write_record(){
       NOW()
       )
       ";
+
+    //한달이 지난 게임기록은 과감하게 삭제 게임을 삭제하면서 생기는 이름없는 오류기록도 삭제
+    $sql_delete_old = "
+    DELETE FROM game_record
+    WHERE DATE < DATE_ADD(NOW(), INTERVAL -1 MONTH)
+    OR NAME = ""
+    ";
       mysqli_query($conn, $sql_query);
+      mysqli_query($conn, $sql_delete_old);
     }
 
     ?>
@@ -95,56 +106,3 @@ function write_record(){
       </script>
     </body>
     </html>
-
-
-    <!--
-    //       mysqli_query($conn, "
-    //       UPDATE player_record
-    //       SET 1st = 1st+1
-    //       , Game_Count = Game_Count+1
-    //       , Sum_Score = Sum_Score+'$first_score'
-    //       , Ave_Score = Sum_Score/Game_Count
-    //       , UMA = ('$first_score'-25000)/1000 + 30
-    //       , Ave_UMA = UMA/Game_Count
-    //       , Star = Star+'$first_star'
-    //       WHERE NAME = '$first_name'
-    //       "
-    //     );
-    //
-    //     mysqli_query($conn, "
-    //     UPDATE player_record
-    //     SET 2nd = 2nd+1
-    //     , Game_Count = Game_Count+1
-    //     , Sum_Score = Sum_Score+'$second_score'
-    //     , Ave_Score = Sum_Score/Game_Count
-    //     , UMA = ('$second_score'-25000)/1000 + 10
-    //     , Ave_UMA = UMA/Game_Count
-    //     , Star = Star+'$second_star'
-    //     WHERE NAME = '$second_name'
-    //     "
-    //   );
-    //   mysqli_query($conn, "
-    //   UPDATE player_record
-    //   SET 3rd = 3rd+1
-    //   , Game_Count = Game_Count+1
-    //   , Sum_Score = Sum_Score+'$third_score'
-    //   , Ave_Score = Sum_Score/Game_Count
-    //   , UMA = ('$third_score'-25000)/1000 -10
-    //   , Ave_UMA = UMA/Game_Count
-    //   , Star = Star+'$third_star'
-    //   WHERE NAME = '$third_name'
-    //   "
-    // );
-    // mysqli_query($conn, "
-    // UPDATE player_record
-    // SET 4th = 4th+1
-    // , Game_Count = Game_Count+1
-    // , Sum_Score = Sum_Score+'$fourth_score'
-    // , Ave_Score = Sum_Score/Game_Count
-    // , UMA = ('$fourth_score'-25000)/1000 -30
-    // , Ave_UMA = UMA/Game_Count
-    // , Star = Star+'$fourth_star'
-    // WHERE NAME = '$fourth_name'
-    // "
-    // );
-  -->

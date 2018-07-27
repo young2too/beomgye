@@ -1,16 +1,11 @@
 <?php
 function get_info_from_db(){
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230","id6538259_lyg");
+  require_once "db_connect.php";
   $query_str = "
   SELECT NAME
   FROM player_record
   ";
 
-  $query_str_for_amount = "
-  SELECT COUNT('NAME') as C
-  FROM player_record
-  ";
 
   $result_set = mysqli_query($conn, $query_str);
   while($row=mysqli_fetch_array($result_set)){
@@ -94,11 +89,8 @@ function print_amount_sum(amount){
   <h2>전적등록 페이지</h2>
   <hr>
   <div class="sidemenu">
-    <ul type="">
-      <li class="vertical"><span style="color :red;">전적등록</span></li>
-      <li class="vertical" onclick="window.open('delete_record.html','_self')"><a class="vertical">전적삭제</a></li>
-      <li class="vertical" onclick="window.open('refresh_form.html','_self')"><a class="vertical">전적 불러오기(천봉)</a></li>
-      <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical">처음으로</a></li>
+    <ul id="sideul">
+
     </ul>
   </div>
   <div class="reg">
@@ -170,6 +162,11 @@ function print_amount_sum(amount){
       placeholder:"닉네임",
       allowClear :true
     });
+  });
+  fetch('manager_sidelist').then(function(response){
+    response.text().then(function(text){
+      document.querySelector('#sideul').innerHTML = text;
+    })
   });
   </script>
 

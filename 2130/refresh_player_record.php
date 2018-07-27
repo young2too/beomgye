@@ -1,8 +1,7 @@
 <?php
 include_once('simple_html_dom.php');
 include_once('update_player_record.php');
-//$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-$conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+require_once "db_connect.php";
 
 
 
@@ -51,6 +50,9 @@ for($i=1;$i<count($record_explode);$i++){
     if($record_explode[$i]===' 四般南喰赤－－ '){
       $room_4ma_flag=true;
     }
+    else{
+      continue;
+    }
     break;
     default:
     continue;
@@ -70,6 +72,8 @@ for($i=1;$i<count($record_explode);$i++){
     $second_name = explode("(", $name_uma_2nd)[0];
     $third_name = explode("(", $name_uma_3rd)[0];
     $fourth_name = explode("(", $name_uma_4th)[0];
+
+    if($first_name==""||$second_name==""||$third_name==""||$fourth_name=="")continue;
 
     $uma_1st = explode(")",explode("(", $name_uma_1st)[1])[0];
     $uma_2nd = explode(")",explode("(", $name_uma_2nd)[1])[0];
@@ -142,8 +146,7 @@ for($i=1;$i<count($record_explode);$i++){
 
     //게임 그 자체가 중복이 되어있는가를 체크하는 함수
     function check_game_dupe($first_n, $second_n, $third_n, $fourth_n, $first_sc, $second_sc, $third_sc, $fourth_sc, $game_date){
-      //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-      $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+      require_once "db_connect.php";
 
       $sql_check_game_dupe_query="
       SELECT COUNT(*) as C
@@ -171,8 +174,7 @@ for($i=1;$i<count($record_explode);$i++){
 
     //이름 등록 안되있으면 등록한다
     function check_name_reg_if_not_regist($names_ary){
-      //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-      $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+      require_once "db_connect.php";
 
       for($i=0;$i<count($names_ary);$i++){
         $input_name = $names_ary[$i];
@@ -190,10 +192,10 @@ for($i=1;$i<count($record_explode);$i++){
     <html>
     <head>
       <meta charset="utf-8">
-      <title></title>
     </head>
     <body>
       <?php
-      update_player_DB();  ?>
+      update_player_DB();
+        ?>
     </body>
     </html>

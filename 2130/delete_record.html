@@ -12,11 +12,7 @@
   <h2>전적 삭제 페이지</h2>
   <hr>
   <div class="sidemenu">
-    <ul type="">
-      <li class="vertical" onclick="window.open('admin_page.php','_self')"><a class="vertical">전적등록</a></li>
-      <li class="vertical"><span style="color :red;">전적삭제</span></li>
-      <li class="vertical" onclick="window.open('refresh_form.html','_self')"><a class="vertical">전적 불러오기(천봉)</a></li>
-      <li class="vertical" oncanplay="window.open()'idnex.php','_self'"><a class="vertical">처음으로</a></li>
+    <ul id="sideul">
     </ul>
   </div>
   <div class="reg">
@@ -32,11 +28,8 @@
     </div>
     <div class="footer">
       <nav>
-        <ul>
-          <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
-          <li class="horizen">young2too13@gmail.com</li>
-          <li class="horizen">Tel 010-123-1234</li>
-          <li class="horizen">ver MADE_BY_LYG</li>
+        <ul id="footul">
+
         </ul>
       </nav>
     </div>
@@ -47,6 +40,16 @@
     for(i=0;i<x.length;i++){
       x[i].valueAsDate = new Date();
     }
+    fetch('manager_sidelist').then(function(response){
+      response.text().then(function(text){
+        document.querySelector('#sideul').innerHTML = text;
+      })
+    });
+    fetch('footlist').then(function(response){
+      response.text().then(function(text){
+        document.querySelector('#footul').innerHTML = text;
+      })
+    });
     </script>
   </body>
   </html>

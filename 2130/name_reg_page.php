@@ -1,7 +1,6 @@
 <?php
 session_start();
 function is_logined(){
-
   if(empty($_SESSION['is_login']) == false){
     echo ("<script>change_form_logout2login()</script>");
     return true;
@@ -24,6 +23,16 @@ function is_logined(){
 </head>
 <script>
 var is_check_dupe=false;
+function join_room(){
+  var room_no = prompt("방번호 입력");
+  if(room_no>1000&&room_no<10000){
+    window.open("http://tenhou.net/0/?"+room_no,"_blank","width=750,height=650,top=300,left=500");
+  }
+  else{
+    alert("1000이상, 10000이하의 숫자 입력");
+  }
+}
+
 function login_ok() {
   var input_id = document.getElementById('loginid').value;
   var input_pw = document.getElementById('loginpw').value;
@@ -147,11 +156,7 @@ function check_name_submit(){
   </div>
   <div class="footer">
     <nav>
-      <ul>
-        <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
-        <li class="horizen">young2too13@gmail.com</li>
-        <li class="horizen">Tel 010-123-1234</li>
-        <li class="horizen">ver MADE_BY_LYG</li>
+      <ul id="footlist">
       </ul>
     </nav>
   </div>
@@ -159,5 +164,13 @@ function check_name_submit(){
   <?php
   is_logined();
   ?>
+  <script>
+  fetch('footlist').then(function(response){
+    response.text().then(function(text){
+      document.querySelector('#footul').innerHTML = text;
+    })
+  });
+
+  </script>
 </body>
 </html>

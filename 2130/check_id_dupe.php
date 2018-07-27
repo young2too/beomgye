@@ -5,8 +5,7 @@ SELECT *
 FROM admin
 WHERE ID= '$admin_id'
 ";
-//$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-$conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+require_once "db_connect.php";
 $result_set = mysqli_query($conn, $query_str) or die(mysqli_error($conn));
 $row = mysqli_fetch_array($result_set);
 mysqli_close($conn);

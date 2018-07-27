@@ -14,8 +14,7 @@ function is_logined(){
 
 function show_ranking(){
   $row_num = 1;
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");//웹호스팅시 비밀번호
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+  require_once "db_connect.php";
   $sql_ranking_query = "
   SELECT  *
   FROM `player_record`
@@ -99,8 +98,8 @@ function show_ranking(){
 
     $print_Star = $temp_1st_star+$temp_2nd_star+$temp_3rd_star+$temp_4th_star;
 
-    $print_UMA = ($print_Sum_Score-($print_Game_Count*25000))/1000+($print_1st*30+$print_2nd*10-$print_3rd*10-$print_4th*30);
-
+    //$print_UMA = ($print_Sum_Score-($print_Game_Count*25000))/1000+($print_1st*30+$print_2nd*10-$print_3rd*10-$print_4th*30);
+    $print_UMA=$row['UMA'];
 
     if($print_Game_Count!=0){
       $print_Ave_Score = round($print_Sum_Score/$print_Game_Count,2);
@@ -209,7 +208,15 @@ function change_form_login2logout(){
 
 function print_result_into_cell(record_result){
   var newDiv=document.createElement('DIV'); // DIV 객체 생성
-  newDiv.setAttribute('class','divTableCell'); // class 지정
+  if(_index==1){
+    newDiv.setAttribute('class','divTableCell_name'); // class 지정
+    newDiv.onclick=function(){
+      window.open("Rating_chart.php?NAME="+record_result,"_blank","width=900, height=600");
+    }
+  }
+  else{
+    newDiv.setAttribute('class','divTableCell'); // class 지정
+  }
   newDiv.innerHTML=record_result; // 객체에 포함할 텍스트
   document.getElementsByClassName('divTableRow')[_rowcount].appendChild(newDiv); // row의 자식 노드로 첨부 (필수)
   _index ++;
@@ -230,13 +237,23 @@ function join_room(){
   else{
     alert("1000이상, 10000이하의 숫자 입력");
   }
-
 }
 </script>
 <body>
   <h1><a class="title" href="index.php">MADE_BY_LYG</a></h1>
   <h2>메인 페이지</h2>
   <hr>
+  <div class="top_menu">
+    <div class="top_menu_child" onclick="window.open('notice_page.php','_blank','width=600px,height=800px')">
+      공지사항
+    </div>
+    <div class="top_menu_child">
+      룰 설명
+    </div>
+    <div class="top_menu_child">
+      플레이 방법
+    </div>
+  </div>
   <div class="grid1">
     <div class="adminlogin">
       <div class="loginedform" id="loginedform">
@@ -267,12 +284,8 @@ function join_room(){
         <hr>
       </div>
       <div class="sidemenu">
-        <ul>
-          <li class="vertical" onclick="window.open('index.php','_self')"><a class="vertical" >처음으로</a></li>
-          <li class="vertical" onclick="window.open('search_record_user.html','_self')"><a class="vertical">전적검색</a></li>
-          <li class="vertical" onclick="window.open('name_reg_page.php','_self')"><a class="vertical">닉네임 등록</a></li>
-          <li class="vertical" onclick="window.open('float_chat.html','_blank', 'width=500,height=400, top=500, left=1000')"><a class="vertical">채팅방 열기</a></li>
-          <li class="vertical" onclick="join_room()"><a class="vertical">게임방 들어가기</a></li>
+        <ul id="sideul">
+
         </ul>
       </div>
     </div>
@@ -306,7 +319,7 @@ function join_room(){
 
   <div class="footer">
     <nav>
-      <ul>
+      <ul id="footul">
         <li class="horizen" onclick="window.open('index.php','_self')">처음으로</li>
         <li class="horizen">young2too13@gmail.com</li>
         <li class="horizen">Tel 010-123-1234</li>
@@ -320,14 +333,19 @@ function join_room(){
   is_logined();
   show_ranking();
   ?>
+  <script>
+  fetch('sidelist').then(function(response){
+    response.text().then(function(text){
+      document.querySelector('#sideul').innerHTML = text;
+    })
+  });
+  fetch('footlist').then(function(response){
+    response.text().then(function(text){
+      document.querySelector('#footul').innerHTML = text;
+    })
+  });
+  </script>
+
 </body>
 
 </html>
-<!-- <table id="record">
-<tr><td>등수</td><td>이름</td><td>평점</td><td style="width:120px">전체점수</td><td>우마</td><td>전체별</td><td>평순위</td><td style="width:50px">1등</td>
-<td style="width:50px">2등</td><td style="width:50px">3등</td><td style="width:50px">4등</td><td>대국 수</td></tr>
-<tr><td>1</td><td>2</td><td>3</td></tr>
-<tr><td>4</td><td>5</td><td>6</td></tr>
-<tr><td>7</td><td>8</td><td>9</td></tr>
-<tr><td>10</td><td>11</td><td>12</td></tr>
-</table> -->

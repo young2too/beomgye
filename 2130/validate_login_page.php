@@ -9,8 +9,7 @@ function check_login(){
    WHERE ID= '$logined_id' and
          PW= PASSWORD('$logined_pw')
          ";
-  //$conn = mysqli_connect("localhost", "id6538259_root", "12301230", "id6538259_lyg");
-  $conn = mysqli_connect("localhost", "root", "12301230", "lyg");
+  require_once "db_connect.php";
   $result_set = mysqli_query($conn, $query_str) or die(mysqli_error($conn));
   while ($row = mysqli_fetch_array($result_set)){
     if($row['ID'] == $logined_id){

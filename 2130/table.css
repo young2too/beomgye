@@ -16,6 +16,15 @@ div.blueTable {
 .divTable.blueTable .divTableBody .divTableCell, .divTable.blueTable .divTableBody .divTableCell_name {
   font-size: 13px;
 }
+.divTable.blueTable .divTableBody .divTableCell_name{
+  transition-duration: 0.4s
+}
+
+.divTable.blueTable .divTableBody .divTableCell_name:hover{
+  text-shadow: 2px 2px 4px red;
+  font-weight:bold;
+}
+
 .divTable.blueTable .divTableRow:nth-child(even) {
   background: #D0E4F5;
 }
@@ -58,6 +67,7 @@ div.blueTable {
 
 div.divTableCell_name{
   cursor: pointer;
+  color:blue;
 }
 
 /* DivTable.com */
